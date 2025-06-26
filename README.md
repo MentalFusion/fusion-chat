@@ -1,2 +1,3 @@
-# fusion-chat
-A simple chat application.
+## Fusion Chat ##
+
+It's gonna be a thing. Eventually.

@@ -1,0 +1,13 @@
+# Next.js build output
+.next/
+
+# Node modules
+node_modules/
+
+# Environment variables
+.env.local
+.env.*.local
+.env
+
+# VS Code settings (optional, if you don't want to share workspace settings)
+.vscode/
