@@ -1,10 +1,17 @@
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <h1 className="text-4xl font-bold">Welcome to Fusion Chat</h1>
-            <p className="mt-4 text-lg">
-                This is a simple chat application built with Next.js.
-            </p>
-        </main>
+        <div className="flex flex-1 w-full">
+            <aside className="hidden lg:block w-1/8 p-4 bg-gray-200">
+                {/* Left Sidebar */}
+            </aside>
+
+            <main className="flex-1 p-4 bg-gray-700">
+                {/* Chat Area */}
+            </main>
+
+            <aside className="hidden lg:block w-1/8 p-4 bg-gray-200">
+                {/* Right Sidebar */}
+            </aside>
+        </div>
     );
 }
