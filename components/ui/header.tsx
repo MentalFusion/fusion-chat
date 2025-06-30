@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChannelsButton, SettingsButton, UsersButton } from "@/components/ui/buttons";
-import Channels from "@/components/ui/channels";
+import Channels from "@/components/ui/channel-menu/channels";
 
 export default function Header() {
     const [isChannelsOpen, setIsChannelsOpen] = useState(false);

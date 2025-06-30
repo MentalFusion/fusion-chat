@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from 'react';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const baseStyles = "p-2 rounded hover:bg-gray-700 hover:cursor-pointer focus:outline-none focus:ring-gray-600";
+const baseStyles = "flex items-center p-2 rounded hover:bg-gray-700 hover:cursor-pointer focus:outline-none focus:ring-gray-600";
 
 export const AddButton = ({ onClick, ...props }: ButtonProps) => (
     <button className={baseStyles} onClick={onClick} {...props}>
