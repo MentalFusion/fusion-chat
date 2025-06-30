@@ -75,7 +75,7 @@ export default function Channels({ onClose }: { onClose: () => void }) {
                         <ul className="space-y-1">
                             {placeholderDirectMessages.map((user, index) => (
                                 <li key={index} className={groupEntryStyles}>
-                                    <div className="relative w-8 h-8 bg-gray-500 rounded-full mr-2 flex items-center justify-center">
+                                    <div className="relative w-8 h-8 flex items-center justify-center bg-gray-500 rounded-full mr-2">
                                         <span className="material-symbols-outlined text-white">person</span>
                                         <div className={clsx([
                                             "absolute bottom-0 right-0 w-2 h-2 rounded-full border border-gray-800",
