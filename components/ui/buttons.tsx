@@ -21,7 +21,7 @@ export const CloseButton = ({ onClick, ...props }: ButtonProps) => (
 );
 
 export const ChannelsButton = ({ onClick, ...props }: ButtonProps) => (
-    <button className={`lg:hidden ${baseStyles}`} onClick={onClick} {...props}>
+    <button className={baseStyles} onClick={onClick} {...props}>
         <span className="material-symbols-outlined">
             chat
         </span>
