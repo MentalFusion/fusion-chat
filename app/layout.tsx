@@ -1,9 +1,6 @@
 import { Public_Sans } from "next/font/google";
 import "./globals.css";
 
-import Header from "@/components/ui/header";
-import Footer from "@/components/ui/footer";
-
 import type { Metadata } from "next";
 
 const publicSans = Public_Sans({
@@ -23,13 +20,9 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${publicSans.variable} antialiased bg-gray-100 text-gray-900 flex flex-col min-h-screen`}>
-                <Header />
-
+        <html lang="en" className="h-full">
+            <body className={`${publicSans.variable} antialiased bg-gray-100 text-gray-900 flex flex-col h-screen`}>
                 {children}
-
-                <Footer />
             </body>
         </html>
     );

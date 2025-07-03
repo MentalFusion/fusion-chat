@@ -20,8 +20,16 @@ export const CloseButton = ({ onClick, ...props }: ButtonProps) => (
     </button>
 );
 
+export const ExpandButton = ({ expanded, onClick, ...props }: { expanded: boolean } & ButtonProps) => (
+    <button className={baseStyles} onClick={onClick} {...props}>
+        <span className="material-symbols-outlined">
+            {expanded ? "expand_less" : "expand_more"}
+        </span>
+    </button>
+);
+
 export const ChannelsButton = ({ onClick, ...props }: ButtonProps) => (
-    <button className={`lg:hidden ${baseStyles}`} onClick={onClick} {...props}>
+    <button className={baseStyles} onClick={onClick} {...props}>
         <span className="material-symbols-outlined">
             chat
         </span>
