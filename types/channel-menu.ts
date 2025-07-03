@@ -1,14 +1,13 @@
-export interface Channel {
+import type { UserInfo } from "./users";
+
+interface Channel {
     name: string;
     type: "group" | "direct";
 };
 
 export type DirectChannel = Channel & {
     type: "direct";
-    user: {
-        active: boolean;
-        online: boolean;
-    };
+    user: UserInfo;
 };
 
 export type GroupChannel = Channel & {

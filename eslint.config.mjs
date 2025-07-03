@@ -10,12 +10,14 @@ const eslintConfig = [
         rules: {
             "indent": ["error", 4],
             "prefer-const": "error",
-            "no-unused-vars": [
+            "no-unused-vars": "off", // prefer using @typescript-eslint/no-unused-vars
+            "@typescript-eslint/no-unused-vars": [
                 "warn",
                 {
                     vars: "all",
                     args: "after-used",
                     ignoreRestSiblings: true,
+                    argsIgnorePattern: "^_",
                 },
             ],
         },

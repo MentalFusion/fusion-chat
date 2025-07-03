@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="h-full">
-            <body className={`${publicSans.variable} antialiased bg-gray-100 text-gray-900 flex flex-col min-h-screen`}>
+            <body className={`${publicSans.variable} antialiased bg-gray-100 text-gray-900 flex flex-col h-screen`}>
                 {children}
             </body>
         </html>
