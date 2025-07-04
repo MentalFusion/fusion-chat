@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import Image from "next/image";
 import type { GroupChannel } from "@/types/channel-menu";
-import type { UserInfo } from "@/types/users";
+import type { UserInfo } from "@/types/user-info";
 
 const baseIconStyles = "relative flex flex-0-0 items-center justify-center";
 
