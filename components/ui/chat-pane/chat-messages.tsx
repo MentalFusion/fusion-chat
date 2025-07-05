@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ChatMessage from "./chat-message";
 import ReactionBar from "./reaction-bar";
@@ -39,28 +39,22 @@ const placeholderMessages = [
 ];
 
 export default function ChatMessages() {
-    const [hoveredMessageId, setHoveredMessageId] = useState<number | null>(null);
-
-    const handleMouseEnter = (messageId: number) => {
-        setHoveredMessageId(messageId);
-    }
-
-    const handleMouseLeave = () => {
-        setHoveredMessageId(null);
-    }
-
-    const handleReaction = (message: Message, reaction: string) => {
-        // handle adding a reaction to the message
-        console.log(`Reacted to message ${message.id} with ${reaction}`);
-    }
-
-    const handleReply = (message: Message) => {
-        // focus the input box and add prefix
-        console.log(`Replying to ${message.user.name}: `);
-    }
+    const {
+        hoveredMessageId,
+        handleMouseEnter,
+        handleMouseLeave,
+        handleReaction,
+        handleReply,
+        handleTouchEnd,
+        handleTouchStart,
+        setHoveredMessageId,
+    } = useChatMessagesHooks();
 
     return (
-        <div className="flex flex-col justify-end flex-1 overflow-y-auto">
+        <div
+            className="flex flex-col justify-end flex-1 overflow-y-auto"
+            onClick={() => setHoveredMessageId(null)}
+        >
             {placeholderMessages.map((message, index) => (
                 <div
                     key={message.id}
@@ -68,6 +62,9 @@ export default function ChatMessages() {
                     onMouseDown={() => handleMouseEnter(message.id)}
                     onMouseEnter={() => handleMouseEnter(message.id)}
                     onMouseLeave={handleMouseLeave}
+                    onTouchMove={handleTouchEnd}
+                    onTouchEnd={handleTouchEnd}
+                    onTouchStart={() => handleTouchStart(message.id)}
                 >
                     <ChatMessage
                         isHovered={hoveredMessageId === message.id}
@@ -87,4 +84,72 @@ export default function ChatMessages() {
             ))}
         </div>
     );
+}
+
+function useChatMessagesHooks() {
+    const [hoveredMessageId, setHoveredMessageId] = useState<number | null>(null);
+    const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
+    const [touchTimer, setTouchTimer] = useState<NodeJS.Timeout | null>(null);
+
+    useEffect(() => {
+        setIsTouchDevice("ontouchstart" in window);
+    }, []);
+
+    const handleMouseEnter = (messageId: number) => {
+        if (!isTouchDevice) {
+            setHoveredMessageId(messageId);
+        }
+    }
+
+    const handleMouseLeave = () => {
+        if (!isTouchDevice) {
+            setHoveredMessageId(null);
+        }
+    }
+
+    const handleReaction = (message: Message, reaction: string) => {
+        // handle adding a reaction to the message
+        console.log(`Reacted to message ${message.id} with ${reaction}`);
+    }
+
+    const handleReply = (message: Message) => {
+        // focus the input box and add prefix
+        console.log(`Replying to ${message.user.name}: `);
+    }
+
+    const handleTouchEnd = () => {
+        console.log("Touch end detected", touchTimer);
+
+        if (touchTimer) {
+            clearTimeout(touchTimer);
+            setTouchTimer(null);
+        }
+    }
+
+    const handleTouchStart = (messageId: number) => {
+        if (isTouchDevice) {
+            const timer = setTimeout(() => {
+                console.log("Touch start detected");
+
+                // add haptic feedback
+                navigator.vibrate?.(50);
+                console.log("Touch start detectedasd");
+                setHoveredMessageId(messageId);
+                console.log("Touch start detectefdsafsd");
+            }, 300);
+
+            setTouchTimer(timer);
+        }
+    }
+
+    return {
+        hoveredMessageId,
+        handleMouseEnter,
+        handleMouseLeave,
+        handleReaction,
+        handleReply,
+        handleTouchEnd,
+        handleTouchStart,
+        setHoveredMessageId,
+    };
 }

@@ -15,7 +15,10 @@ export default function ReactionBar({
                     key={reaction}
                     className={reactionButtonStyles}
                     title={`React with ${reaction}`}
-                    onClick={() => onReaction(reaction)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        onReaction(reaction);
+                    }}
                 >
                     {reaction}
                 </button>
