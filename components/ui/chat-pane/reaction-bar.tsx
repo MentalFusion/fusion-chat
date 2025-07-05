@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function ReactionBar({
     onReaction,
     onReply,
@@ -9,16 +11,14 @@ export default function ReactionBar({
     const reactionButtonStyles = "text-xl hover:bg-gray-700 rounded p-1 cursor-pointer";
 
     return (
-        <div className="flex space-x-1 p-1 bg-gray-800 rounded-md border-gray-500 border">
+        <div className="flex space-x-1 p-1 bg-gray-800 rounded-md border-gray-500 border select-none">
             {recentReactions.map((reaction) => (
                 <button
                     key={reaction}
                     className={reactionButtonStyles}
                     title={`React with ${reaction}`}
-                    onClick={(event) => {
-                        event.stopPropagation();
-                        onReaction(reaction);
-                    }}
+                    onMouseDown={() => onReaction(reaction)}
+                    onTouchEnd={() => onReaction(reaction)}
                 >
                     {reaction}
                 </button>
@@ -26,7 +26,8 @@ export default function ReactionBar({
 
             <button
                 className={`flex flex-col justify-center ${reactionButtonStyles}`}
-                onClick={() => console.log("Adding a reaction")}
+                onMouseDown={() => console.log("Adding a reaction")}
+                onTouchEnd={() => console.log("Adding a reaction")}
             >
                 <span className="material-symbols-outlined">add_reaction</span>
             </button>
@@ -35,7 +36,8 @@ export default function ReactionBar({
 
             <button
                 className={`flex flex-col justify-center ${reactionButtonStyles}`}
-                onClick={onReply}
+                onMouseDown={onReply}
+                onTouchEnd={onReply}
             >
                 <span className="material-symbols-outlined">reply</span>
             </button>

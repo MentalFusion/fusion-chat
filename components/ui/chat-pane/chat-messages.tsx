@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ChatMessage from "./chat-message";
 import ReactionBar from "./reaction-bar";
@@ -40,21 +40,19 @@ const placeholderMessages = [
 
 export default function ChatMessages() {
     const {
+        clearTouchTimer,
         hoveredMessageId,
         handleMouseEnter,
         handleMouseLeave,
         handleReaction,
         handleReply,
-        handleTouchEnd,
         handleTouchStart,
-        setHoveredMessageId,
+        setHoveredMessageId
     } = useChatMessagesHooks();
 
     return (
-        <div
-            className="flex flex-col justify-end flex-1 overflow-y-auto"
-            onClick={() => setHoveredMessageId(null)}
-        >
+        <div className="relative flex flex-col justify-end flex-1 overflow-y-auto">
+            <div className="absolute flex-1 h-full w-full" onClick={() => setHoveredMessageId(null)}></div>
             {placeholderMessages.map((message, index) => (
                 <div
                     key={message.id}
@@ -62,9 +60,10 @@ export default function ChatMessages() {
                     onMouseDown={() => handleMouseEnter(message.id)}
                     onMouseEnter={() => handleMouseEnter(message.id)}
                     onMouseLeave={handleMouseLeave}
-                    onTouchMove={handleTouchEnd}
-                    onTouchEnd={handleTouchEnd}
-                    onTouchStart={() => handleTouchStart(message.id)}
+                    onTouchCancel={clearTouchTimer}
+                    onTouchEnd={clearTouchTimer}
+                    onTouchMove={clearTouchTimer}
+                    onTouchStart={handleTouchStart(message.id)}
                 >
                     <ChatMessage
                         isHovered={hoveredMessageId === message.id}
@@ -89,11 +88,25 @@ export default function ChatMessages() {
 function useChatMessagesHooks() {
     const [hoveredMessageId, setHoveredMessageId] = useState<number | null>(null);
     const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
+    const [touchStarted, setTouchStarted] = useState<boolean>(false);
     const [touchTimer, setTouchTimer] = useState<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         setIsTouchDevice("ontouchstart" in window);
     }, []);
+
+    const clearTouchTimer = (event: React.TouchEvent<HTMLDivElement>) => {
+        event.stopPropagation();
+
+        if (touchTimer) {
+            clearTimeout(touchTimer);
+            setTouchTimer(null);
+        }
+
+        if (touchStarted) setHoveredMessageId(null);
+
+        setTouchStarted(false);
+    }
 
     const handleMouseEnter = (messageId: number) => {
         if (!isTouchDevice) {
@@ -117,38 +130,31 @@ function useChatMessagesHooks() {
         console.log(`Replying to ${message.user.name}: `);
     }
 
-    const handleTouchEnd = () => {
-        console.log("Touch end detected", touchTimer);
+    const handleTouchStart = (messageId: number) => (event: React.TouchEvent<HTMLDivElement>) => {
+        event.stopPropagation();
 
-        if (touchTimer) {
-            clearTimeout(touchTimer);
-            setTouchTimer(null);
-        }
-    }
+        if (isTouchDevice && !touchStarted) {
+            setTouchStarted(true);
 
-    const handleTouchStart = (messageId: number) => {
-        if (isTouchDevice) {
             const timer = setTimeout(() => {
-                console.log("Touch start detected");
-
                 // add haptic feedback
                 navigator.vibrate?.(50);
-                console.log("Touch start detectedasd");
+
                 setHoveredMessageId(messageId);
-                console.log("Touch start detectefdsafsd");
-            }, 300);
+                setTouchStarted(false);
+            }, 500);
 
             setTouchTimer(timer);
         }
     }
 
     return {
+        clearTouchTimer,
         hoveredMessageId,
         handleMouseEnter,
         handleMouseLeave,
         handleReaction,
         handleReply,
-        handleTouchEnd,
         handleTouchStart,
         setHoveredMessageId,
     };
