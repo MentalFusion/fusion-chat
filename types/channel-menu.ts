@@ -1,4 +1,4 @@
-import type { UserInfo } from "./users";
+import type { UserInfo } from "./user-info";
 
 interface Channel {
     name: string;

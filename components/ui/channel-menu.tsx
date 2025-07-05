@@ -17,16 +17,16 @@ const placeholderGroups = [
 ] as GroupChannel[];
 
 const placeholderDirectMessages = [
-    { name: "Alice", user: { active: false, online: true }, type: "direct" },
-    { name: "Bob", user: { active: false, online: false }, type: "direct" },
-    { name: "Charlie", user: { active: true, online: true }, type: "direct" },
-    { name: "Diana", user: { active: true, online: false }, type: "direct" },
-    { name: "Ethan", user: { active: false, online: true }, type: "direct" },
-    { name: "Fiona", user: { active: true, online: true }, type: "direct" },
-    { name: "George", user: { active: false, online: false }, type: "direct" },
-    { name: "Hannah", user: { active: true, online: true }, type: "direct" },
-    { name: "Ian", user: { active: false, online: true }, type: "direct" },
-    { name: "Jasmine", user: { active: true, online: false }, type: "direct" },
+    { name: "Alice", user: { name: "Alice", active: false, online: true, avatarUrl: "abc123" }, type: "direct" },
+    { name: "Bob", user: { name: "Bob", active: false, online: false, avatarUrl: "abc123" }, type: "direct" },
+    { name: "Charlie", user: { name: "Charlie", active: true, online: true, avatarUrl: "abc123" }, type: "direct" },
+    { name: "Diana", user: { name: "Diana", active: true, online: false, avatarUrl: "abc123" }, type: "direct" },
+    { name: "Ethan", user: { name: "Ethan", active: false, online: true, avatarUrl: "abc123" }, type: "direct" },
+    { name: "Fiona", user: { name: "Fiona", active: true, online: true, avatarUrl: "abc123" }, type: "direct" },
+    { name: "George", user: { name: "George", active: false, online: false, avatarUrl: "abc123" }, type: "direct" },
+    { name: "Hannah", user: { name: "Hannah", active: true, online: true, avatarUrl: "abc123" }, type: "direct" },
+    { name: "Ian", user: { name: "Ian", active: false, online: true, avatarUrl: "abc123" }, type: "direct" },
+    { name: "Jasmine", user: { name: "Jasmine", active: true, online: false, avatarUrl: "abc123" }, type: "direct" },
 ] as DirectChannel[];
 
 export default function ChannelMenu({ onClose }: { onClose?: () => void }) {

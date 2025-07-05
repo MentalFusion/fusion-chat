@@ -11,3 +11,5 @@ node_modules/
 
 # VS Code settings (optional, if you don't want to share workspace settings)
 .vscode/
+
+public/images/whisper-avatar.png
