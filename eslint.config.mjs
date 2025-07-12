@@ -8,9 +8,11 @@ const eslintConfig = [
     ...compat.config({
         extends: ["next/core-web-vitals", "next/typescript"],
         rules: {
-            "indent": ["error", 4],
+            "indent": ["error", 4, { "SwitchCase": 1 }],
             "prefer-const": "error",
             "no-unused-vars": "off", // prefer using @typescript-eslint/no-unused-vars
+            "quotes": ["error", "double", { "avoidEscape": true }],
+            "semi": ["error", "always"],
             "@typescript-eslint/no-unused-vars": [
                 "warn",
                 {

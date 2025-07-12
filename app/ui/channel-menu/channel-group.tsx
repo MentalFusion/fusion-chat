@@ -1,10 +1,12 @@
+"use client";
+
 import clsx from "clsx";
 import { useState } from "react";
 
-import { AddButton, ExpandButton } from "@/components/ui/buttons";
-import { GroupChannelIcon, UserIcon } from "@/components/ui/icons";
+import { AddButton, ExpandButton } from "../buttons";
+import { GroupChannelIcon, UserIcon } from "../icons";
 
-import type { AnyChannel } from "@/types/channel-menu";
+import type { AnyChannel } from "~/types/channel-menu";
 
 interface ChannelGroupProps {
     title: string;

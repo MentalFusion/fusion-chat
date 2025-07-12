@@ -1,4 +1,8 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useRef } from "react";
+import twemoji from "@twemoji/api";
+import * as emoji from "node-emoji";
 
 export default function ReactionBar({
     onReaction,
@@ -7,11 +11,25 @@ export default function ReactionBar({
     onReaction: (reaction: string) => void;
     onReply: () => void;
 }) {
-    const recentReactions = ["👍", "❤️", "😂"];
-    const reactionButtonStyles = "text-xl hover:bg-gray-700 rounded p-1 cursor-pointer";
+    const reactionBarRef = useRef<HTMLDivElement>(null);
+    const recentReactions = [":+1:", ":heart:", ":joy:"].map((r) => emoji.emojify(r));
+    const reactionButtonStyles = "flex flex-col justify-center hover:bg-gray-700 rounded p-1 cursor-pointer";
+
+    useEffect(() => {
+        if (reactionBarRef.current) {
+            twemoji.parse(reactionBarRef.current, {
+                folder: "svg",
+                ext: ".svg",
+                className: "inline-block align-middle h-5",
+            });
+        }
+    }, [recentReactions]);
 
     return (
-        <div className="flex space-x-1 p-1 bg-gray-800 rounded-md border-gray-500 border select-none">
+        <div
+            ref={reactionBarRef}
+            className="flex space-x-1 p-1 bg-gray-800 rounded-md border-gray-500 border select-none"
+        >
             {recentReactions.map((reaction) => (
                 <button
                     key={reaction}
@@ -25,7 +43,7 @@ export default function ReactionBar({
             ))}
 
             <button
-                className={`flex flex-col justify-center ${reactionButtonStyles}`}
+                className={reactionButtonStyles}
                 onMouseDown={() => console.log("Adding a reaction")}
                 onTouchEnd={() => console.log("Adding a reaction")}
             >
@@ -35,7 +53,7 @@ export default function ReactionBar({
             <div className="text-gray-500 border-r-[1px]"></div>
 
             <button
-                className={`flex flex-col justify-center ${reactionButtonStyles}`}
+                className={reactionButtonStyles}
                 onMouseDown={onReply}
                 onTouchEnd={onReply}
             >

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChannelsButton, SettingsButton, UsersButton } from "@/components/ui/buttons";
+import { ChannelsButton, SettingsButton, UsersButton } from "./buttons";
 
 export default function Header({
     onChannelMenuOpen,

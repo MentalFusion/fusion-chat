@@ -2,11 +2,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import ChannelMenu from "@/components/ui/channel-menu";
-import Header from "@/components/ui/header";
-import Footer from "@/components/ui/footer";
-import ChatPane from "@/components/ui/chat-pane";
-import { UserIcon, userIconStylesLg } from "@/components/ui/icons";
+import ChannelMenu from "./ui/channel-menu";
+import Header from "./ui/header";
+import Footer from "./ui/footer";
+import ChatPane from "./ui/chat-pane";
 
 export default function Home() {
     const [isChannelMenuOpen, setIsChannelMenuOpen] = useState(false);

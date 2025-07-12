@@ -1,10 +1,12 @@
+"use client";
+
 import { useState } from "react";
 
-import { ClickToCloseOverlay } from "@/components/ui/overlays";
-import { CloseButton } from "@/components/ui/buttons";
+import { ClickToCloseOverlay } from "./overlays";
+import { CloseButton } from "./buttons";
 import ChannelGroup from "./channel-menu/channel-group";
 
-import type { AnyChannel, DirectChannel, GroupChannel } from "@/types/channel-menu";
+import type { AnyChannel, DirectChannel, GroupChannel } from "~/types/channel-menu";
 
 const placeholderGroups = [
     { name: "General", private: false, type: "group" },

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 
 import ChatMessage from "./chat-message";
@@ -9,31 +11,31 @@ const placeholderMessages = [
     {
         id: 1,
         user: { name: "Alice", online: true, active: true, avatarUrl: "abc123" },
-        content: "Hello everyone! How's it going?",
+        content: "Hello everyone! How's it going? :heart:",
         timestamp: "10:15 AM",
     },
     {
         id: 2,
         user: { name: "Bob", online: false, active: false, avatarUrl: "abc123" },
-        content: "Hey Alice! I'm doing well, thanks!",
+        content: "Hey Alice! I'm doing well, thanks! :smile:",
         timestamp: "10:16 AM",
     },
     {
         id: 3,
         user: { name: "Charlie", online: true, active: true, avatarUrl: "abc123" },
-        content: "Hi everyone! Just joined the channel.",
+        content: "Hi everyone! Just joined the channel. :wave:",
         timestamp: "10:17 AM",
     },
     {
         id: 4,
         user: { name: "Charlie", online: true, active: true, avatarUrl: "abc123" },
-        content: "Second message from the same user.",
+        content: "Second message from the same user. :thinking:",
         timestamp: "10:18 AM",
     },
     {
         id: 5,
         user: { name: "Michael", online: true, active: true, avatarUrl: "abc123" },
-        content: "Hey team, any updates on the project?",
+        content: "Hey team, any updates on the project? :question:",
         timestamp: "10:19 AM",
     },
 ];
@@ -52,7 +54,7 @@ export default function ChatMessages() {
 
     return (
         <div className="relative flex flex-col justify-end flex-1 overflow-y-auto">
-            <div className="absolute flex-1 h-full w-full" onClick={() => setHoveredMessageId(null)}></div>
+            <div className="absolute flex-1 h-full w-full" onClick={() => setHoveredMessageId(null)} />
             {placeholderMessages.map((message, index) => (
                 <div
                     key={message.id}
@@ -106,29 +108,29 @@ function useChatMessagesHooks() {
         if (touchStarted) setHoveredMessageId(null);
 
         setTouchStarted(false);
-    }
+    };
 
     const handleMouseEnter = (messageId: number) => {
         if (!isTouchDevice) {
             setHoveredMessageId(messageId);
         }
-    }
+    };
 
     const handleMouseLeave = () => {
         if (!isTouchDevice) {
             setHoveredMessageId(null);
         }
-    }
+    };
 
     const handleReaction = (message: Message, reaction: string) => {
         // handle adding a reaction to the message
         console.log(`Reacted to message ${message.id} with ${reaction}`);
-    }
+    };
 
     const handleReply = (message: Message) => {
         // focus the input box and add prefix
         console.log(`Replying to ${message.user.name}: `);
-    }
+    };
 
     const handleTouchStart = (messageId: number) => (event: React.TouchEvent<HTMLDivElement>) => {
         event.stopPropagation();
@@ -146,7 +148,7 @@ function useChatMessagesHooks() {
 
             setTouchTimer(timer);
         }
-    }
+    };
 
     return {
         clearTouchTimer,
